@@ -38,6 +38,17 @@
                   <textarea v-model="newActivity.notes" class="textarea" placeholder="Write some notes here"></textarea>
                 </div>
               </div>
+
+              <div class="field">
+                <label class="label">Notes</label>
+                <div class="control">
+                  <select v-model="newActivity.category" class="select">
+                    <option disabled value="">Please Select One</option>
+                    <option v-for="category in categories" >{{category.text}}</option>
+
+                  </select>
+                </div>
+              </div>
               <div class="field is-grouped">
                 <div class="control">
                   <button @click="createActivity" class="button is-link"
@@ -81,7 +92,8 @@ export default {
       watchedAppName : 'Activity Planner by CyVision',
       newActivity: {
         title: '',
-        notes: ''
+        notes: '',
+        category :''
       },
       items: {1: {name: 'Filip'}, 2: {name: 'John'}},
         user: {
