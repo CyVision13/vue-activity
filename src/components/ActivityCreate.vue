@@ -29,7 +29,7 @@
               </div>
               <div class="field is-grouped">
                 <div class="control">
-                  <button @click="createActivity" class="button is-link"
+                  <button @click.prevent="createActivity" class="button is-link"
                   :disabled="!isFormValid"
                   >Create Activity</button>
                 </div>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import {createActivity} from '@/api'
 export default {
     props: {
       categories : {
@@ -70,7 +71,8 @@ export default {
         this.isFormDisplayed = !this.isFormDisplayed
       },
       createActivity () {
-      console.log(this.newActivity)
+        const activity = createActivity( this.newActivity)
+      this.$emit('activityCreated', {...activity})
     }
     }
 }

@@ -34,8 +34,19 @@ export const fetchCategories = () =>{
 }
 export const fetchUser = () =>{
     return {
-        name: 'Filip Jerga',
+        name: 'CyVision',
           id: '-Aj34jknvncx98812',
         
     }
+}
+
+const generateUid = ()=> Math.floor(new Date() * Math.random())
+
+export const createActivity = (activity) =>{
+    activity.id = generateUid()
+    activity.progress = 0 
+    activity.createdAt = new Date()
+    activity.updatedAt = new Date()
+
+    return activity
 }

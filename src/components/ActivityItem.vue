@@ -11,7 +11,7 @@
         <div class="content">
           <p>
             <a href="#">
-              Filip Jerga
+              CyVision
               </a> updated {{ activity.updatedAt }} minutes ago &nbsp;
           </p>
         </div>

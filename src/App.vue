@@ -23,7 +23,7 @@
       <div class="columns">
         <div class="column is-3">
           <!-- activity form -->
-          <ActivityCreate :categories="categories" />
+          <ActivityCreate :categories="categories" @activityCreated="addActivity" />
         </div>
         <div class="column is-9">
           <div class="box content">
@@ -107,10 +107,11 @@ export default {
   },
   
   methods: {
-    
-    createActivity () {
-      console.log(this.newActivity)
-    }//,
+    addActivity(newActivity){
+      debugger
+      console.log(newActivity);
+    }
+   //,
     // isFormValid(){
     //   return this.newActivity.title && this.newActivity.notes
     // }
