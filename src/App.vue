@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import {fetchActivities } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import {fetchUser } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import {fetchCategories } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
@@ -108,7 +109,9 @@ export default {
   
   methods: {
     addActivity(newActivity){
-      debugger
+      // this.activities[newActivity.id] = newActivity
+      Vue.set(this.activities, newActivity.id , newActivity)
+    
       console.log(newActivity);
     }
    //,
