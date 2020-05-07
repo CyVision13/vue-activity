@@ -8,17 +8,9 @@
         </div>
       </div>
     </nav>
-    <nav class="navbar is-white">
-      <div class="container">
-        <div class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item is-active" href="#">Newest</a>
-            <a class="navbar-item" href="#">In Progress</a>
-            <a class="navbar-item" href="#">Finished</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+      <TheNavbar >
+
+      </TheNavbar>
     <section class="container">
       <div class="columns">
         <div class="column is-3">
@@ -26,12 +18,24 @@
           <ActivityCreate :categories="categories" @activityCreated="addActivity" />
         </div>
         <div class="column is-9">
-          <div class="box content">
-            <ActivityItem v-for="activity in activities"
+          <div class="box content" :class="{fetching:isFetching , hasError: error}">
+            <div v-if="error">
+              {{error}}
+              
+            </div>
+            <div v-else>
+                <div v-if="isFetching">
+                  Loading ...
+                </div>
+               <ActivityItem v-for="activity in activities"
                            :activity="activity"
                            :key="activity.id"></ActivityItem>
-            <div class="activity-length">Currently {{activityLength}} activities</div>
-            <div class="activity-motivation">{{activityMotivation}}</div>
+            </div>
+            <div  v-show="!isFetchig">
+              <div class="activity-length">Currently {{activityLength}} activities</div>
+              <div class="activity-motivation">{{activityMotivation}}</div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -46,9 +50,10 @@ import {fetchUser } from '@/api/index'; // @ means Automaticly refer to src fold
 import {fetchCategories } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import ActivityItem from '@/components/ActivityItem'
 import ActivityCreate from '@/components/ActivityCreate'
+import TheNavbar from '@/components/TheNavbar'
 export default {
   name: 'app',
-  components: {ActivityItem , ActivityCreate},
+  components: {ActivityItem , ActivityCreate , TheNavbar},
   data () {
     return {
       isFormDisplayed: false,
@@ -60,7 +65,8 @@ export default {
         notes: '',
         category :''
       },
-      items: {1: {name: 'Filip'}, 2: {name: 'John'}},
+        isFetching: false,
+        error: null,
         user: {
           
         },
@@ -69,6 +75,20 @@ export default {
          
         }
     }
+  },
+  created(){
+    this.isFetching = true
+     fetchActivities()
+      .then((activities)=>{
+        this.activities =activities
+        this.isFetching = false;
+      })
+      .catch((err)=>{
+        this.error = err
+        this.isFetching = false;
+      });
+    this.user = fetchUser()
+    this.categories = fetchCategories()
   },
   computed : {
     isFormValid(){
@@ -101,17 +121,7 @@ export default {
   //     this.watchedAppName =  val + ' by ' + this.creator
   //   }
   // },
-  created(){
-     fetchActivities()
-      .then((activities)=>{
-        this.activities =activities
-      })
-      .catch((err)=>{
-        console.log(err);
-      });
-    this.user = fetchUser()
-    this.categories = fetchCategories()
-  },
+  
   
   methods: {
     addActivity(newActivity){
@@ -142,6 +152,13 @@ html,body {
 }
 footer {
   background-color: #F2F6FA !important;
+}
+
+.fetching {
+  border: 2px solid orange;
+}
+.hasError {
+  border : 2px solid red;
 }
 
 .activity-motivation {
