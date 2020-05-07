@@ -18,7 +18,7 @@
               </div>
 
               <div class="field">
-                <label class="label">Notes</label>
+                <label class="label">Category</label>
                 <div class="control">
                   <select v-model="newActivity.category" class="select">
                     <option disabled value="">Please Select One</option>
@@ -63,17 +63,26 @@ export default {
     },
     computed:{
     isFormValid(){
-      return this.newActivity.title && this.newActivity.notes
+      return this.newActivity.title && this.newActivity.notes && this.newActivity.category
     },
     },
     methods :{
       toggleFormDisplay(){
         this.isFormDisplayed = !this.isFormDisplayed
       },
+      resetActivities(){
+            this.newActivity.title = '';
+            this.newActivity.notes = '';
+            this.newActivity.category = '';
+      },
       createActivity () {
-         createActivityApi( this.newActivity)
+         createActivityApi( {...this.newActivity})
           .then((activity)=>{
             this.$emit('activityCreated', {...activity})
+          })
+          .then(()=>{
+            this.resetActivities();
+            this.toggleFormDisplay();
           })
         
     }

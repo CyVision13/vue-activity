@@ -106,6 +106,9 @@ export default {
       .then((activities)=>{
         this.activities =activities
       })
+      .catch((err)=>{
+        console.log(err);
+      });
     this.user = fetchUser()
     this.categories = fetchCategories()
   },
