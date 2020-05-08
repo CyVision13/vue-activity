@@ -7,7 +7,7 @@ const activities = {
             id: '1546968934',
             title: 'Learn Vue.js',
             notes: 'I started today and it was not good.',
-            progress: 0,
+            progress: 66,
             category: '1546969049',
             createdAt: 1546969144391,
             updatedAt: 1546969144391
@@ -38,7 +38,7 @@ export const fetchActivities = () =>{
                 resolve(activities)
             else
             reject('Cannot fetch Activities')
-        },2000)
+        },1000)
     })
     
 }
