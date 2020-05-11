@@ -29,9 +29,10 @@
                 </div>
                <ActivityItem v-for="activity in activities"
                            :activity="activity"
+                           :categories="categories"
                            :key="activity.id"></ActivityItem>
             </div>
-            <div  v-show="!isFetchig">
+            <div  v-show="!isFetching">
               <div class="activity-length">Currently {{activityLength}} activities</div>
               <div class="activity-motivation">{{activityMotivation}}</div>
             </div>

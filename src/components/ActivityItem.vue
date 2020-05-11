@@ -1,6 +1,8 @@
 <template>
   <article class="post">
-    <h4>{{ activity.title }}</h4>
+    <h4 class="title-class">{{ activity.title }}</h4>
+    <p>{{ capitilize(categories[activity.category].text)}}</p>
+    <p>{{ activity.notes}}</p>
     <div class="media">
       <div class="media-left">
         <p class="image is-32x32">
@@ -27,6 +29,10 @@
 <script>
   export default {
     props: {
+      categories:{
+         type : Object,
+        required: true
+      },
       activity: {
         type : Object,
         required: true
@@ -42,6 +48,13 @@
           return 'orange'
         else
           return 'green'
+      }
+    },
+    methods:{
+      capitilize(word){
+        if(word && typeof word ==='string'){
+          return word.charAt(0).toUpperCase() + word.slice(1)
+        }
       }
     }
   }
@@ -59,4 +72,7 @@
 .color-green {
   color: green;
 } */
+.post .title-class {
+  margin-bottom: 5px;
+}
 </style>
