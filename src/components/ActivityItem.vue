@@ -1,7 +1,7 @@
 <template>
   <article class="post">
     <h4 class="title-class">{{ activity.title }}</h4>
-    <p>{{ capitilize(categories[activity.category].text)}}</p>
+    <p>{{ textUtility_capitilize(categories[activity.category].text)}}</p>
     <p>{{ activity.notes}}</p>
     <div class="media">
       <div class="media-left">
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import textUtility from '@/mixins/textutility'
   export default {
     props: {
       categories:{
@@ -38,6 +39,7 @@
         required: true
       }
     },
+    mixins: [textUtility], //textUtility is function that extract its data and methods
     computed:{
       activityProgress(){
         const progress = this.activity.progress
@@ -49,14 +51,8 @@
         else
           return 'green'
       }
-    },
-    methods:{
-      capitilize(word){
-        if(word && typeof word ==='string'){
-          return word.charAt(0).toUpperCase() + word.slice(1)
-        }
-      }
     }
+    
   }
 </script>
 
