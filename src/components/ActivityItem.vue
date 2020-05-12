@@ -1,6 +1,6 @@
 <template>
   <article class="post">
-    <h4 class="title-class">{{ activity.title }}</h4>
+    <h4 class="title-class">{{ activity.title  }}</h4>
     <p>{{ textUtility_capitilize(categories[activity.category].text)}}</p>
     <p>{{ activity.notes}}</p>
     <div class="media">
@@ -14,7 +14,7 @@
           <p>
             <a href="#">
               CyVision
-              </a> updated {{ activity.updatedAt }} minutes ago &nbsp;
+              </a> updated {{ activity.updatedAt | prettyTime }} &nbsp;
           </p>
         </div>
       </div>
