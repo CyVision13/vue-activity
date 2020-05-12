@@ -1,10 +1,10 @@
 <template>
-  <div id="activityApp">
+  <div v-if="isDataLoaded"  id="activityApp">
     <nav class="navbar is-white topNav">
       <div class="container">
         <div class="navbar-brand">
           <h1>{{fullAppName}}</h1>
-          <!-- <h1>{{ watchedAppName }}</h1> -->
+          <!-- <h1>{{ watchedAppName }}</h1> --> 
         </div>
       </div>
     </nav>
@@ -71,10 +71,8 @@ export default {
         user: {
           
         },
-        activities: {        },
-        categories: {
-         
-        }
+        activities: null,
+        categories: null
     }
   },
   created(){
@@ -111,6 +109,9 @@ export default {
     }else {
       return 'No activities, so sad:('
     }
+  },
+  isDataLoaded(){
+    return this.activities && this.categories
   }
   },
 
