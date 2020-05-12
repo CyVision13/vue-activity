@@ -87,7 +87,7 @@ export default {
         this.isFetching = false;
       });
     this.user = fetchUser()
-    this.categories = fetchCategories().then(categories=>{
+    fetchCategories().then(categories=>{
         this.categories = categories
     })
   },
