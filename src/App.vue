@@ -89,7 +89,9 @@ export default {
         this.isFetching = false;
       });
     this.user = fetchUser()
-    this.categories = fetchCategories()
+    this.categories = fetchCategories().then(categories=>{
+        this.categories = categories
+    })
   },
   computed : {
     isFormValid(){

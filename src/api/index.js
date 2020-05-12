@@ -1,54 +1,15 @@
 
-const activities = {
-    
-        
-            
-        '1546968934': {
-            id: '1546968934',
-            title: 'Learn Vue.js',
-            notes: 'I started today and it was not good.',
-            progress: 66,
-            category: '1546969049',
-            createdAt: 1546969144391,
-            updatedAt: 1546969144391
-        },
-        '1546969212': {
-            id: '1546969212',
-            title: 'Read Witcher Books',
-            notes: 'These books are super nice',
-            progress: 0,
-            category: '1546969049',
-            createdAt: 1546969144391,
-            updatedAt: 1546969144391
-        }
-    
-
-}
-const canConttinue = ()=>{
-    const rndNumber = Math.floor(Math.random() * 10)
-    if(rndNumber >5) return true
-    else 
-    return false
-}
+import fakeApi from '@/Lib/fakeApi'
+const generateUid = ()=> Math.floor(new Date() * Math.random())
 
 export const fetchActivities = () =>{
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
-            if(canConttinue())
-                resolve(activities)
-            else
-            reject('Cannot fetch Activities')
-        },1000)
-    })
+    return fakeApi.get('activities')
     
 }
 export const fetchCategories = () =>{
-    return {
-        '1546969049': {text: 'books', id:'1546969049'},
-        '1546969225': {text: 'movies', id:'1546969225'}
-           
-    }
+    return fakeApi.get('categories')
 }
+
 export const fetchUser = () =>{
     return {
         name: 'CyVision',
@@ -56,8 +17,6 @@ export const fetchUser = () =>{
         
     }
 }
-
-const generateUid = ()=> Math.floor(new Date() * Math.random())
 
 export const createActivityApi = (activity) =>{
     activity.id = generateUid()
