@@ -90,7 +90,7 @@ export default {
     fetchCategories().then(categories=>{
         this.categories = categories
     })
-  },
+  }, //callback Added
   computed : {
     isFormValid(){
       return this.newActivity.title && this.newActivity.notes
