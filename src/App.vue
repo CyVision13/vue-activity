@@ -30,7 +30,8 @@
                <ActivityItem v-for="activity in activities"
                            :activity="activity"
                            :categories="categories"
-                           :key="activity.id"></ActivityItem>
+                           :key="activity.id"
+                           @ActivityDeleted="handleActivityDelete"></ActivityItem>
             </div>
             <div  v-show="!isFetching">
               <div class="activity-length">Currently {{activityLength}} activities</div>
@@ -46,7 +47,7 @@
 
 <script>
 import Vue from 'vue'
-import {fetchActivities } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
+import {fetchActivities , deleteActivityApi } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import {fetchUser } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import {fetchCategories } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import ActivityItem from '@/components/ActivityItem'
@@ -133,6 +134,12 @@ export default {
       Vue.set(this.activities, newActivity.id , newActivity)
     
       
+    },
+    handleActivityDelete(Activity){
+      deleteActivityApi(Activity)
+        .then(deletedActivity=>{
+          Vue.delete(this.activities,deletedActivity.id)
+        })
     }
    //,
     // isFormValid(){

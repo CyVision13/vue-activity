@@ -29,3 +29,8 @@ export const createActivityApi = (activity) =>{
 
     
 }
+
+export const deleteActivityApi = (activity)=>{
+    
+    return fakeApi.delete('activities',activity)
+}

@@ -61,7 +61,13 @@ class FakeApi {
             resolve(item)
         })
     }
-
+    delete(resource , item){
+        return new Promise((resolve,reject)=>{
+            
+            delete data[resource][item.id]
+            resolve(item)
+        })
+    }
     asyncCall(cb){
         setTimeout(cb,1000)
     }
