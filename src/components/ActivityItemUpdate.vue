@@ -53,7 +53,7 @@
 </template>
 
 <script>
-//   import store from '@/store'
+ import store from '@/store'
   // import textUtility from '@/mixins/textUtility'
   export default {
     // mixins: [textUtility],

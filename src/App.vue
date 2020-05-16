@@ -48,9 +48,9 @@
 <script>
 import Vue from 'vue'
 import store from './store'
-import {fetchActivities , deleteActivityApi } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
-import {fetchUser } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
-import {fetchCategories } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
+//import {fetchActivities , deleteActivityApi } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
+//import {fetchUser } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
+//import {fetchCategories } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import ActivityItem from '@/components/ActivityItem'
 import ActivityCreate from '@/components/ActivityCreate'
 import TheNavbar from '@/components/TheNavbar'
@@ -73,24 +73,24 @@ export default {
         user: {
           
         },
-        activities: null,
-        categories: null
+        activities: store.state.activities,
+        categories: store.state.categories
     }
   },
   created(){
     this.isFetching = true
-     fetchActivities()
+     store.fetchActivities()
       .then((activities)=>{
-        this.activities =activities
+        
         this.isFetching = false;
       })
       .catch((err)=>{
         this.error = err
         this.isFetching = false;
       });
-    this.user = fetchUser()
-    fetchCategories().then(categories=>{
-        this.categories = categories
+    this.user = store.fetchUser()
+    store.fetchCategories().then(categories=>{
+        
     })
   }, //callback Added
   computed : {
@@ -137,7 +137,7 @@ export default {
       
     },
     handleActivityDelete(Activity){
-      deleteActivityApi(Activity)
+      store.deleteActivityApi(Activity)
         .then(deletedActivity=>{
           Vue.delete(this.activities,deletedActivity.id)
         })
