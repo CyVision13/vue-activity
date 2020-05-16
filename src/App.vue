@@ -47,6 +47,7 @@
 
 <script>
 import Vue from 'vue'
+import store from './store'
 import {fetchActivities , deleteActivityApi } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import {fetchUser } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
 import {fetchCategories } from '@/api/index'; // @ means Automaticly refer to src folder and we could use @/api 
