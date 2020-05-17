@@ -41,13 +41,16 @@ const store = {
         }
     },
 
-     createActivityApi  (activity){
+     createActivity  (activity){
         activity.id = this.generateUid()
         activity.progress = 0 
         activity.createdAt = new Date()
         activity.updatedAt = new Date()
 
         return fakeApi.post('activities',activity)
+            .then(createdActivity=>{
+                this.setItem('activities',createdActivity.id,createdActivity)
+            })
         
 
         

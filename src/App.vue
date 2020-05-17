@@ -15,7 +15,7 @@
       <div class="columns">
         <div class="column is-3">
           <!-- activity form -->
-          <ActivityCreate :categories="categories" @activityCreated="addActivity" />
+          <ActivityCreate :categories="categories"  />
         </div>
         <div class="column is-9">
           <div class="box content" :class="{fetching:isFetching , hasError: error}">
@@ -131,12 +131,7 @@ export default {
   
   
   methods: {
-    addActivity(newActivity){
-      // this.activities[newActivity.id] = newActivity
-      Vue.set(this.activities, newActivity.id , newActivity)
     
-      
-    },
     
    //,
     // isFormValid(){

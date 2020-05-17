@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import store from '@/store'
 import {createActivityApi} from '@/api'
 export default {
     props: {
@@ -76,14 +77,19 @@ export default {
             this.newActivity.category = '';
       },
       createActivity () {
-         createActivityApi( {...this.newActivity})
-          .then((activity)=>{
-            this.$emit('activityCreated', {...activity})
+        store.createActivity({...this.newActivity})
+          .then(activity=>{
+            this.resetActivities()
+            this.isFormDisplayed = false
           })
-          .then(()=>{
-            this.resetActivities();
-            this.toggleFormDisplay();
-          })
+        //  createActivityApi( {...this.newActivity})
+        //   .then((activity)=>{
+        //     this.$emit('activityCreated', {...activity})
+        //   })
+        //   .then(()=>{
+        //     this.resetActivities();
+        //     this.toggleFormDisplay();
+        //   })
         
     }
     }
