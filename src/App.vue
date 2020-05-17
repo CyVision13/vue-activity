@@ -31,7 +31,8 @@
                            :activity="activity"
                            :categories="categories"
                            :key="activity.id"
-                           @ActivityDeleted="handleActivityDelete"></ActivityItem>
+                           
+                           ></ActivityItem>
             </div>
             <div  v-show="!isFetching">
               <div class="activity-length">Currently {{activityLength}} activities</div>
@@ -136,12 +137,7 @@ export default {
     
       
     },
-    handleActivityDelete(Activity){
-      store.deleteActivityApi(Activity)
-        .then(deletedActivity=>{
-          Vue.delete(this.activities,deletedActivity.id)
-        })
-    }
+    
    //,
     // isFormValid(){
     //   return this.newActivity.title && this.newActivity.notes

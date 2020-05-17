@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import store from '@/store'
 import textUtility from '@/mixins/textutility'
   export default {
     data(){
@@ -67,7 +68,8 @@ import textUtility from '@/mixins/textutility'
     },
     methods:{
       deleteActivity(){
-        this.$emit('ActivityDeleted',this.activity)
+        // this.$emit('ActivityDeleted',this.activity)
+        store.deleteActivity(this.activity)
       }
     }
     

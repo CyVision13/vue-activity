@@ -13,8 +13,10 @@ const store = {
     fetchActivities () {
         return fakeApi.get('activities',{force: 1})
             .then(activities =>{
+                const keys = Object.keys(activities)
+                debugger;
                 Object.keys(activities).forEach((key)=>{
-                    Vue.set(this.state.activities , key ,activities[key])
+                    this.setItem('activities',key,activities[key])
                 })
                 
                 return activities
@@ -25,12 +27,12 @@ const store = {
         return fakeApi.get('categories',{force : 1})
         .then(categories =>{
             Object.keys(categories).forEach((key)=>{
-                Vue.set(this.state.categories , key ,categories[key])
+                this.setItem('categories',key,categories[key])
             })
                 return categories
         })
     },
-
+    
      fetchUser () {
         return {
             name: 'CyVision',
@@ -51,10 +53,17 @@ const store = {
         
     },
 
-    deleteActivityApi (activity){
-        
+    deleteActivity (activity){
         return fakeApi.delete('activities',activity)
-    }
+            .then(deletedActivity=>{
+                Vue.delete(this.state.activities,activity.id)
+                return deletedActivity
+            })
+    },
+    setItem(resource,id,item){
+        Vue.set(this.state[resource],id,item)
+    },
+
     
 }
 
