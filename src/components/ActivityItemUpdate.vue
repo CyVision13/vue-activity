@@ -53,8 +53,8 @@
 </template>
 
 <script>
- import store from '@/store'
-  // import textUtility from '@/mixins/textUtility'
+  import store from '@/store'
+  import textUtility from '@/mixins/textutility'
   export default {
     // mixins: [textUtility],
     props: {
