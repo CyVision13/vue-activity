@@ -35,6 +35,16 @@ const data = {
 }
 
 class FakeApi {
+    fillDB(){
+        this.commitData(data)
+    }
+    commitData(data){
+        localStorage.setItem('activity_data',JSON.stringify(data))
+    }
+    getData(){
+        const activityData = localStorage.getItem('activity_data')
+        return JSON.parse(activityData)
+    }
      canConttinue  (){
         const rndNumber = Math.floor(Math.random() * 10)
         if(rndNumber >5) return true
@@ -47,7 +57,8 @@ class FakeApi {
         return new Promise((resolve, reject)=>{
             this.asyncCall(()=>{
                 if(force || this.canConttinue())
-                resolve({...data[resource]})
+                {const data = this.getData();
+                resolve({...data[resource]})}
                 else
                 reject('Cannot fetch '+ resource)
             })
@@ -57,14 +68,17 @@ class FakeApi {
     }
     post(resource,item){
         return new Promise((resolve,reject)=>{
+            const data = this.getData()
             data[resource][item.id] = item 
+            this.commitData(data)
             resolve(item)
         })
     }
     delete(resource , item){
         return new Promise((resolve,reject)=>{
-            
+            const data = this.getData()
             delete data[resource][item.id]
+            this.commitData(data)
             resolve(item)
         })
     }
