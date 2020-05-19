@@ -106,6 +106,7 @@ export default {
         return this.activities
       this.activities;
     },
+    
     isFormValid(){
       return this.newActivity.title && this.newActivity.notes
     },
