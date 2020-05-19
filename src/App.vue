@@ -8,7 +8,7 @@
         </div>
       </div>
     </nav>
-      <TheNavbar >
+      <TheNavbar @filterSelected="setFilter" >
 
       </TheNavbar>
     <section class="container">
@@ -29,7 +29,7 @@
                 </div>
                <ActivityItem 
                             v-if="isDataLoaded"
-                            v-for="activity in activities"
+                            v-for="activity in filteredActivities"
                             
                            :activity="activity"
                            :categories="categories"
@@ -65,6 +65,7 @@ export default {
   data () {
     return {
       isFormDisplayed: false,
+      filter:'all',
       creator: 'CyVision',
       appName: 'Activity Planner',
       watchedAppName : 'Activity Planner by CyVision',
@@ -83,7 +84,7 @@ export default {
     }
   },
   created(){
-    // fakeApi.fillDB() Only run Once 
+    // fakeApi.fillDB()  
     this.isFetching = true
      store.fetchActivities()
       .then((activities)=>{
@@ -100,6 +101,11 @@ export default {
     })
   }, //callback Added
   computed : {
+    filteredActivities(){
+      if(this.filter==='all')
+        return this.activities
+      this.activities;
+    },
     isFormValid(){
       return this.newActivity.title && this.newActivity.notes
     },
@@ -131,6 +137,17 @@ export default {
   },
 
 
+   methods: {
+    setFilter(filterOption){
+      this.filter = filterOption
+    }
+    
+   //,
+    // isFormValid(){
+    //   return this.newActivity.title && this.newActivity.notes
+    // }
+  }
+
 
   // watch:{
   //   creator(val){
@@ -142,14 +159,7 @@ export default {
   // },
   
   
-  methods: {
-    
-    
-   //,
-    // isFormValid(){
-    //   return this.newActivity.title && this.newActivity.notes
-    // }
-  }
+ 
 }
 </script>
 
