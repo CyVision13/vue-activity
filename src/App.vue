@@ -102,11 +102,18 @@ export default {
   }, //callback Added
   computed : {
     filteredActivities(){
-      if(this.filter==='all')
+      let filteredActivities = {}
+      if(this.filter==='all'){
         return this.activities
-      this.activities;
+      }
+      
+      filteredActivities = Object.values(this.activities)
+        .filter(activity=>{
+          return activity.progress > 0 && activity.progress <100
+        })
+      return filteredActivities;
     },
-    
+
     isFormValid(){
       return this.newActivity.title && this.newActivity.notes
     },
