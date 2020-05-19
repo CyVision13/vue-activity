@@ -103,14 +103,24 @@ export default {
   computed : {
     filteredActivities(){
       let filteredActivities = {}
+      let condition 
       if(this.filter==='all'){
         return this.activities
       }
-      
+      if (this.filter ==='inprogress'){ 
+         condition = (value)=> value > 0 && value <100
+  
+      }
+      else if (this.filter === 'finished'){
+         condition = (value)=> value === 100
+      }else {
+        condition = (value)=> value === 0
+      }
       filteredActivities = Object.values(this.activities)
         .filter(activity=>{
-          return activity.progress > 0 && activity.progress <100
+          return condition(activity.progress)
         })
+
       return filteredActivities;
     },
 
