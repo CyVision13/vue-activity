@@ -117,9 +117,7 @@ export default {
         condition = (value)=> value === 0
       }
       filteredActivities = Object.values(this.activities)
-        .filter(activity=>{
-          return condition(activity.progress)
-        })
+        .filter(activity=> condition(activity.progress))
 
       return filteredActivities;
     },
